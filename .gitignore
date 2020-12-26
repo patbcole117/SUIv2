@@ -1,0 +1,4 @@
+/.sui_venv/
+/.vscode/
+config.txt
+__pycache__
