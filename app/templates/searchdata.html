@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>{{title}}</title>
     <link rel="stylesheet" href="/static/style.css"/>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">  
@@ -23,29 +23,30 @@
         </div>
     </div>
 
-    <div class="slice" id="twitch_embed"></div>
-
-    <div class="slice" id="tables">
-        <div class="table" id="current_bout">LATEST BOUTS</div><p id="line"></p>
-        <div class="table" id="latest_bouts">LATEST BOUTS</div><p id="line"></p>
-        <div class="table" id="latest_fighters">LATEST FIGHTERS</div>
-    </div>
-
-    <div class="slice" id="bottom">
+    <div class="slice" id="mini_twitch">
+        <div id="twitch_embed_mini"></div>
+        <div id="right_box">
         <div id="clock"></div>
+        <div id="current_bout"></div>
+        </div>
     </div>
+    
+    <div class="slice" id="tables">
+        <div class="table" id="table"></div>
+    </div>
+
 </div>
 
-<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-
-<script src="/static/dashboard.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js" integrity="sha512-qzgd5cYSZcosqpzpn7zF2ZId8f/8CHmFKZ8j7mU4OUXTNRd5g+ZHBPsgKEwoqxCtdQvExE5LprwwPAgoicguNg==" crossorigin="anonymous"></script>
+<script src="/static/searchdata.js"></script>
 
 <!-- Load the Twitch embed script -->
 <script src="https://player.twitch.tv/js/embed/v1.js"></script>
         
 <!-- Create a Twitch.Player object. This will render within the placeholder div -->
 <script type="text/javascript">
-  var player = new Twitch.Player("twitch_embed", {height: "100%", width: "100%", channel: "saltybet"});
+  var player = new Twitch.Player("twitch_embed_mini", {height: "100%", width: "100%", channel: "saltybet"});
   player.setVolume(0.5);
 </script>
 

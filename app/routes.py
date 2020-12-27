@@ -11,6 +11,26 @@ import requests
 def dashboard():
     return render_template('dashboard.html')
 
+@app.route('/bouts')
+def bouts():
+    return render_template('searchdata.html', title='Bouts')
+
+@app.route('/fighters')
+def fighters():
+    return render_template('searchdata.html', title='Fighters')
+
+@app.route('/e_bouts')
+def e_bouts():
+    c = get_config()
+    bouts = json.loads(requests.get(c['sdc_url'] + f'bouts?sort=id').content)
+    return render_template('e_filtertable.html', items=bouts, table_title='BOUTS')
+
+@app.route('/e_fighters')
+def e_fighters():
+    c = get_config()
+    fighters = json.loads(requests.get(c['sdc_url'] + f'fighters?sort=id').content)
+    return render_template('e_filtertable.html', items=fighters, table_title='FIGHTERS')
+
 @app.route('/e_clock')
 def e_clock():
     time = datetime.now().strftime('%Y-%m-%d, %H:%M:%S')
@@ -45,16 +65,16 @@ def e_current_bout_table():
     
     current_bout = [red, blue]
 
-    return render_template('table.html', items=current_bout, table_title='CURRENT BOUT')
+    return render_template('e_table.html', items=current_bout, table_title='CURRENT BOUT')
 
 @app.route('/e_latest_bouts_table')
 def e_latest_bouts_table():
     c = get_config()
     latest_bouts = json.loads(requests.get(c['sdc_url'] + f'bouts?num=10&sort=id&sort_type=bottom').content)
-    return render_template('table.html', items=latest_bouts, table_title='LATEST BOUTS')
+    return render_template('e_table.html', items=latest_bouts, table_title='LATEST BOUTS')
 
 @app.route('/e_latest_fighters_table')
 def e_latest_fighters_table():
     c = get_config()
     latest_fighters = json.loads(requests.get(c['sdc_url'] + f'fighters?num=10&sort=id&sort_type=bottom').content)
-    return render_template('table.html', items=latest_fighters, table_title='LATEST FIGHTERS')
+    return render_template('e_table.html', items=latest_fighters, table_title='LATEST FIGHTERS')

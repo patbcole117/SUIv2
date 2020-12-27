@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="/static/e_table.css"/>
+<div class="e_table_div">
+    <h5 id="e_table_h5">{{table_title}}</h5>
+    <input id="filterInput" type="text" placeholder="Search...">
+    <table id="filterTable">
+        <thead>
+            <tr>
+                {% for k, v in items[0].items() %}
+                <th>{{k.upper().replace("_", " ")}}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody id="filterBody">
+            {% for i in items %}
+            <tr>
+                {% for k, v in i.items() %}
+                <td>{{v}}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js" integrity="sha512-qzgd5cYSZcosqpzpn7zF2ZId8f/8CHmFKZ8j7mU4OUXTNRd5g+ZHBPsgKEwoqxCtdQvExE5LprwwPAgoicguNg==" crossorigin="anonymous"></script>
+<script src="/static/e_filtertable.js"></script>

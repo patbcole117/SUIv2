@@ -3,6 +3,12 @@
     text-align: center;
 }
 
+.e_table_div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 table {
     margin: 25px auto;
     border-collapse: collapse;
@@ -34,4 +40,9 @@ th {
     background: #0D1117;
     color: #FFFFFF;
     font-size: 12px;
+}
+
+input {
+    width: 90%;
+    margin: auto;
 }

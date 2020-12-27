@@ -1,15 +1,15 @@
 a:link {
-    color: rgb(0, 160, 128);
+    color: #FFFFFF;
     text-decoration: none;
 }
 
 a:visited {
-    color: white;
+    color: #FFFFFF;
     text-decoration: none;
 }
 
 a:hover {
-    color: blue;
+    color: #00AAAA;
     text-decoration: none;
 }
 
@@ -18,21 +18,21 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
+
+#main {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
 .slice {
     border-top: 1px solid lawngreen;
     border-bottom: 1px solid lawngreen;
     background-color: #161B22;
     height: auto;
-    left: 0;
-    margin: 0 auto;
-    position: absolute;
-    top: 0;
-    width: 100%;
-}
-
-#main {
-    display: flex;
-    flex-direction: column;
 }
 
 #top {
@@ -50,22 +50,26 @@ body {
 }
 
 #logo {
-    height: 32px;
+    height: 35px;
     margin: auto 0px;
     padding-left: 12px;
-    width:36px;
+    width:40px;
 }
 
 #twitch_embed {
-    top: 5vh;
     height: 90vh;
 }
 
-#tables {
-    height: 132vh;
-    top: 95vh;
+#twitch_embed_mini {
+    height: 45vh;
+    width: 50%
 }
 
-#bottom {
-    top: 227vh;
+#mini_twitch {
+    display: flex;
+    flex-direction: row;
+}
+
+#line {
+    border: 1px solid lawngreen;
 }
