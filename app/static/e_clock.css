@@ -1,4 +1,6 @@
-#e_clock_h5 {
+#e_clock_div {
     color: #FFFFFF;
+    line-height: 4px;
+    padding: 5px 0px;
     text-align: center;
 }
