@@ -1,0 +1,37 @@
+#e_table_h5 {
+    color: #FFFFFF;
+    text-align: center;
+}
+
+table {
+    margin: 25px auto;
+    border-collapse: collapse;
+    border: 1px solid #FFFFFF;
+    border-bottom: 2px solid #00CCCC;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.10),
+    0px 10px 20px rgba(0, 0, 0, 0.05),
+    0px 20px 20px rgba(0, 0, 0, 0.05),
+    0px 30px 20px rgba(0, 0, 0, 0.05),;
+    width: 90%;
+}
+
+tr {
+    background-color:#111D2E;
+}
+
+tr:hover {
+    background-color:#101F20;
+}
+
+th, td {
+    color: #AAAAAA;
+    border: 1px solid #FFFFFF;
+    padding: 12px 35px;
+    border-collapse: collapse;
+}
+
+th {
+    background: #0D1117;
+    color: #FFFFFF;
+    font-size: 12px;
+}

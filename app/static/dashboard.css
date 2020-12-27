@@ -1,0 +1,70 @@
+a:link {
+    color: rgb(0, 160, 128);
+    text-decoration: none;
+}
+
+a:visited {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    color: blue;
+    text-decoration: none;
+}
+
+body {
+    background-color: #06090F;
+    font-family: 'Lato', sans-serif;
+}
+
+.slice {
+    border-top: 1px solid lawngreen;
+    border-bottom: 1px solid lawngreen;
+    background-color: #161B22;
+    height: auto;
+    left: 0;
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+#main {
+    display: flex;
+    flex-direction: column;
+}
+
+#top {
+    display: flex;
+    flex-direction: row;
+    height: 5vh;
+}
+
+#links {
+    display: flex;
+    font-size: 16px;
+    justify-content: space-evenly;
+    margin: auto 0px;
+    width: 20%;
+}
+
+#logo {
+    height: 32px;
+    margin: auto 0px;
+    padding-left: 12px;
+    width:36px;
+}
+
+#twitch_embed {
+    top: 5vh;
+    height: 90vh;
+}
+
+#tables {
+    top: 95vh;
+}
+
+#bottom {
+    top: 227vh;
+}
