@@ -24,13 +24,8 @@ def fighters():
 
 @app.route('/configurations')
 def configurations():
-    sui_status = get_config()
-    sbo_status = json.loads(requests.get(sui_status['sbo_url'] + f'status').content)
-    sdc_status = json.loads(requests.get(sui_status['sdc_url'] + f'status').content)
 
-    configs = [sbo_status, sui_status, sdc_status]
-
-    return render_template('configurations.html', items=configs, title='Configurations')
+    return render_template('configurations.html', title='Configurations')
 
 @app.route('/api/v1/help')
 def api_v1_help():
@@ -120,3 +115,23 @@ def e_latest_fighters_table():
 @app.route('/e_top')
 def e_top():
     return render_template('/elements/e_top.html')
+
+
+@app.route('/e_sbo_config')
+def e_sbo_config():
+    c = get_config()
+    sbo_status = json.loads(requests.get(c['sbo_url'] + f'status').content)
+    return render_template('/elements/e_config.html', items=sbo_status, title='SBO CONFIGURATION')
+
+
+@app.route('/e_sdc_config')
+def e_sdc_config():
+    c = get_config()
+    sdc_status = json.loads(requests.get(c['sdc_url'] + f'status').content)
+    return render_template('/elements/e_config.html', items=sdc_status, title='SDC CONFIGURATION')
+
+
+@app.route('/e_sui_config')
+def e_sui_config():
+    sui_status = get_config()
+    return render_template('/elements/e_config.html', items=sui_status, title='SUI CONFIGURATION')
