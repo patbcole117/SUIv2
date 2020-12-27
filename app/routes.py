@@ -121,6 +121,7 @@ def e_top():
 def e_sbo_config():
     c = get_config()
     sbo_status = json.loads(requests.get(c['sbo_url'] + f'status').content)
+    sbo_status = json.dumps(sbo_status, indent=2)
     return render_template('/elements/e_config.html', items=sbo_status, title='SBO CONFIGURATION')
 
 
@@ -128,10 +129,12 @@ def e_sbo_config():
 def e_sdc_config():
     c = get_config()
     sdc_status = json.loads(requests.get(c['sdc_url'] + f'status').content)
+    sdc_status = json.dumps(sdc_status, indent=2)
     return render_template('/elements/e_config.html', items=sdc_status, title='SDC CONFIGURATION')
 
 
 @app.route('/e_sui_config')
 def e_sui_config():
     sui_status = get_config()
+    sui_status = json.dumps(sui_status, indent=2)
     return render_template('/elements/e_config.html', items=sui_status, title='SUI CONFIGURATION')
