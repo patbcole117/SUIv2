@@ -1,5 +1,6 @@
 $('#clock').load('/e_clock');
 $('#current_bout').load('/e_current_bout_table');
+$('#top').load('/e_top');
 
 if (document.title == "Bouts"){
     $('#table').load('/e_bouts');
