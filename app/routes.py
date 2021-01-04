@@ -48,14 +48,14 @@ def api_v1_status():
 @app.route('/e_bouts')
 def e_bouts():
     c = get_config()
-    bouts = json.loads(requests.get(c['sdc_url'] + f'bouts?sort=id').content)
+    bouts = json.loads(requests.get(c['SUI_SDC_URL'] + f'bouts?sort=id').content)
     return render_template('/elements/e_filtertable.html', items=bouts, table_title='BOUTS')
 
 
 @app.route('/e_fighters')
 def e_fighters():
     c = get_config()
-    fighters = json.loads(requests.get(c['sdc_url'] + f'fighters?sort=id').content)
+    fighters = json.loads(requests.get(c['SUI_SDC_URL'] + f'fighters?sort=id').content)
     return render_template('/elements/e_filtertable.html', items=fighters, table_title='FIGHTERS')
 
 
@@ -69,15 +69,15 @@ def e_clock():
 def e_current_bout_table():
     c = get_config()
     
-    sbo_status = json.loads(requests.get(c['sbo_url'] + 'status').content)
+    sbo_status = json.loads(requests.get(c['SUI_SBO_URL'] + 'status').content)
 
     p1name = sbo_status['bout']['p1name']
     p1bets = sbo_status['bout']['p1total']
-    rf = json.loads(requests.get(c['sdc_url'] + f'fighters?name={p1name}').content)
+    rf = json.loads(requests.get(c['SUI_SDC_URL'] + f'fighters?name={p1name}').content)
     
     p2name = sbo_status['bout']['p2name']
     p2bets = sbo_status['bout']['p2total']
-    bf = json.loads(requests.get(c['sdc_url'] + f'fighters?name={p2name}').content)
+    bf = json.loads(requests.get(c['SUI_SDC_URL'] + f'fighters?name={p2name}').content)
 
     red = {'team': 'RED', 'name': p1name, 'bets': p1bets, 'wins': None, 'losses': None, 'elo': None, 'num_upsets': None, 'current_streak': None, 'date_of_debut': None}
     blue = {'team': 'BLUE', 'name': p2name, 'bets': p2bets, 'wins': None, 'losses': None, 'elo': None, 'num_upsets': None, 'current_streak': None, 'date_of_debut': None}
@@ -100,14 +100,14 @@ def e_current_bout_table():
 @app.route('/e_latest_bouts_table')
 def e_latest_bouts_table():
     c = get_config()
-    latest_bouts = json.loads(requests.get(c['sdc_url'] + f'bouts?num=10&sort=id&sort_type=bottom').content)
+    latest_bouts = json.loads(requests.get(c['SUI_SDC_URL'] + f'bouts?num=10&sort=id&sort_type=bottom').content)
     return render_template('/elements/e_table.html', items=latest_bouts, table_title='LATEST BOUTS')
 
 
 @app.route('/e_latest_fighters_table')
 def e_latest_fighters_table():
     c = get_config()
-    latest_fighters = json.loads(requests.get(c['sdc_url'] + f'fighters?num=10&sort=id&sort_type=bottom').content)
+    latest_fighters = json.loads(requests.get(c['SUI_SDC_URL'] + f'fighters?num=10&sort=id&sort_type=bottom').content)
     return render_template('/elements/e_table.html', items=latest_fighters, table_title='LATEST FIGHTERS')
 
 
@@ -120,7 +120,7 @@ def e_top():
 @app.route('/e_sbo_config')
 def e_sbo_config():
     c = get_config()
-    sbo_status = json.loads(requests.get(c['sbo_url'] + f'status').content)
+    sbo_status = json.loads(requests.get(c['SUI_SBO_URL'] + f'status').content)
     sbo_status = json.dumps(sbo_status, indent=2)
     return render_template('/elements/e_config.html', items=sbo_status, title='SBO CONFIGURATION')
 
@@ -128,7 +128,7 @@ def e_sbo_config():
 @app.route('/e_sdc_config')
 def e_sdc_config():
     c = get_config()
-    sdc_status = json.loads(requests.get(c['sdc_url'] + f'status').content)
+    sdc_status = json.loads(requests.get(c['SUI_SDC_URL'] + f'status').content)
     sdc_status = json.dumps(sdc_status, indent=2)
     return render_template('/elements/e_config.html', items=sdc_status, title='SDC CONFIGURATION')
 
