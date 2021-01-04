@@ -2,5 +2,5 @@ FROM python:alpine3.7
 COPY . /sui
 WORKDIR /sui
 RUN pip install -r requirements.txt
-ENTRYPOINT [ "python" ]
-CMD [ "run.py" ]
+RUN pip install gunicorn
+CMD [ "gunicorn", "--workers", "3", "--bind", "0.0.0.0:80", "run:app" ]
