@@ -1,4 +1,3 @@
-
 from app import app
 from app.utils.conf_parse import get_config
 
