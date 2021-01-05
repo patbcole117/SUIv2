@@ -3,4 +3,4 @@ COPY . /sui
 WORKDIR /sui
 RUN pip install -r requirements.txt
 RUN pip install gunicorn
-CMD [ "gunicorn", "--workers", "3", "--bind", "0.0.0.0:80", "run:app" ]
+CMD [ "gunicorn", "--workers", "1", "--bind", "0.0.0.0:80", "run:app" ]
