@@ -16,7 +16,9 @@ def dashboard():
 @app.route('/bouts')
 def bouts():
     c = get_config()
-    bouts = json.loads(requests.get(c['SUI_SDC_URL'] + f'bouts?sort=id').content)
+    page=request.args.get('page', default=0, type=int)
+    sort=request.args.get('sort', default='id')
+    bouts = json.loads(requests.get(c['SUI_SDC_URL'] + f'bouts?sort={sort}').content)
 
     num_bouts = len(bouts)
 
@@ -27,7 +29,6 @@ def bouts():
 
     pages = list(range(0, max_page))
 
-    page=request.args.get('page', default=0, type=int)
     if page > max_page:
         page = max_page
     
@@ -45,7 +46,10 @@ def bouts():
 @app.route('/fighters')
 def fighters():
     c = get_config()
-    fighters = json.loads(requests.get(c['SUI_SDC_URL'] + f'fighters?sort=id').content)
+    page=request.args.get('page', default=0, type=int)
+    sort=request.args.get('sort', default='name')
+
+    fighters = json.loads(requests.get(c['SUI_SDC_URL'] + f'fighters?sort={sort}').content)
     num_fighters = len(fighters)
 
     page_size = 100
@@ -55,7 +59,6 @@ def fighters():
 
     pages = list(range(0, max_page))
 
-    page=request.args.get('page', default=0, type=int)
     if page > max_page:
         page = max_page
     
@@ -106,27 +109,33 @@ def e_current_bout_table():
 
     p1name = sbo_status['bout']['p1name']
     p1bets = sbo_status['bout']['p1total']
-    rf = json.loads(requests.get(c['SUI_SDC_URL'] + f'fighters?name={p1name}').content)
-    
+    try:
+        rf = json.loads(requests.get(c['SUI_SDC_URL'] + f'exactfighter?name={p1name}').content)
+    except:
+        rf = None
+
     p2name = sbo_status['bout']['p2name']
     p2bets = sbo_status['bout']['p2total']
-    bf = json.loads(requests.get(c['SUI_SDC_URL'] + f'fighters?name={p2name}').content)
+    try:
+        bf = json.loads(requests.get(c['SUI_SDC_URL'] + f'exactfighter?name={p2name}').content)
+    except:
+        bf = None
 
     red = {'team': 'RED', 'name': p1name, 'bets': p1bets, 'wins': None, 'losses': None, 'elo': None, 'num_upsets': None, 'current_streak': None, 'date_of_debut': None}
     blue = {'team': 'BLUE', 'name': p2name, 'bets': p2bets, 'wins': None, 'losses': None, 'elo': None, 'num_upsets': None, 'current_streak': None, 'date_of_debut': None}
 
-    if len(rf) > 0:
+    if rf is not None:
         for k, v in red.items():
             if k in rf[0].keys():
                 red[k] = rf[0][k]
 
-    if len(bf) > 0:
+    if bf is not None:
         for k, v in blue.items():
             if k in bf[0].keys():
                 blue[k] = bf[0][k]
     
     current_bout = [red, blue]
-
+    print (current_bout)
     return render_template('/elements/e_table.html', items=current_bout, table_title='CURRENT BOUT')
 
 
