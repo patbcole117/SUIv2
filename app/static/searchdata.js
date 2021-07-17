@@ -1,5 +1,5 @@
-$('#clock').load('/e_clock');
 $('#current_bout').load('/e_current_bout_table');
+$('#clock').load('/e_clock');
 $('#top').load('/e_top');
 
 setInterval(function(){
