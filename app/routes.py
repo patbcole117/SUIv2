@@ -141,20 +141,22 @@ def e_current_bout_table():
     blue = {'team': 'BLUE', 'name': p2name, 'bets': p2bets, 'wins': None, 'losses': None, 'elo': None, 'num_upsets': None, 'current_streak': None, 'date_of_debut': None}
 
     try:
-        rf = json.loads(requests.get(c['SUI_SDC_URL'] + f'exactfighter?name={p1name}').content)
+        req_p1 = requests.get(c['SUI_SDC_URL'] + f'exactfighter?name={p1name}').content
+        rf = json.loads(req_p1)
         for k, v in red.items():
-            if k in rf[0].keys():
-                red[k] = rf[0][k]
+            if k in rf.keys():
+                red[k] = rf[k]
     except:
-        rf = None
-
+        pass
+        
     try:
-        bf = json.loads(requests.get(c['SUI_SDC_URL'] + f'exactfighter?name={p2name}').content)
+        req_p2 = requests.get(c['SUI_SDC_URL'] + f'exactfighter?name={p2name}').content
+        bf = json.loads(req_p2)
         for k, v in blue.items():
-            if k in bf[0].keys():
-                blue[k] = bf[0][k]
+            if k in bf.keys():
+                blue[k] = bf[k]
     except:
-        bf = None
+        pass
     
     current_bout = [red, blue]
     print (current_bout)
