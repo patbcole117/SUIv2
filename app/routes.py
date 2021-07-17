@@ -19,15 +19,28 @@ def bouts():
     page=request.args.get('page', default=0, type=int)
     sort=request.args.get('sort', default='id')
     bouts = json.loads(requests.get(c['SUI_SDC_URL'] + f'bouts?sort={sort}').content)
-
     num_bouts = len(bouts)
 
     page_size = 100
-    max_page = num_bouts // page_size
+    max_page = num_bouts// page_size
     if num_bouts % page_size > 0:
-        max_page= max_page + 1
+        max_page = max_page + 1
 
-    pages = list(range(0, max_page))
+    disp_pages_start = page - 5
+
+    disp_pages_end = disp_pages_start + 50
+    if disp_pages_end > max_page:
+        disp_pages_end = max_page
+        disp_pages_start = max_page - 50
+
+    if disp_pages_start < 0:
+        disp_pages_start = 0
+
+    pages = list(range(disp_pages_start, disp_pages_end))
+    if pages[0] != 0:
+        pages.insert(0, 0)
+    if pages[-1] != max_page:
+        pages.append(max_page)
 
     if page > max_page:
         page = max_page
@@ -38,8 +51,6 @@ def bouts():
     if last_index > len(bouts):
         last_index = len(bouts)
         first_index = last_index - page_size
-
-
     return render_template('searchdata.html', title='bouts', items=bouts[first_index:last_index], table_title='BOUTS', pages=pages)
 
 
@@ -55,9 +66,23 @@ def fighters():
     page_size = 100
     max_page = num_fighters // page_size
     if num_fighters % page_size > 0:
-        max_page= max_page + 1
+        max_page = max_page + 1
 
-    pages = list(range(0, max_page))
+    disp_pages_start = page - 5
+
+    disp_pages_end = disp_pages_start + 50
+    if disp_pages_end > max_page:
+        disp_pages_end = max_page
+        disp_pages_start = max_page - 50
+    
+    if disp_pages_start < 0:
+        disp_pages_start = 0
+
+    pages = list(range(disp_pages_start, disp_pages_end))
+    if pages[0] != 0:
+        pages.insert(0, 0)
+    if pages[-1] != max_page:
+        pages.append(max_page)
 
     if page > max_page:
         page = max_page
