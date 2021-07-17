@@ -15,12 +15,58 @@ def dashboard():
 
 @app.route('/bouts')
 def bouts():
-    return render_template('searchdata.html', title='Bouts')
+    c = get_config()
+    bouts = json.loads(requests.get(c['SUI_SDC_URL'] + f'bouts?sort=id').content)
+
+    num_bouts = len(bouts)
+
+    page_size = 100
+    max_page = num_bouts // page_size
+    if num_bouts % page_size > 0:
+        max_page= max_page + 1
+
+    pages = list(range(0, max_page))
+
+    page=request.args.get('page', default=0, type=int)
+    if page > max_page:
+        page = max_page
+    
+    first_index = page * page_size
+    last_index = first_index + page_size
+
+    if last_index > len(bouts):
+        last_index = len(bouts)
+        first_index = last_index - page_size
+
+
+    return render_template('searchdata.html', title='bouts', items=bouts[first_index:last_index], table_title='BOUTS', pages=pages)
 
 
 @app.route('/fighters')
 def fighters():
-    return render_template('searchdata.html', title='Fighters')
+    c = get_config()
+    fighters = json.loads(requests.get(c['SUI_SDC_URL'] + f'fighters?sort=id').content)
+    num_fighters = len(fighters)
+
+    page_size = 100
+    max_page = num_fighters // page_size
+    if num_fighters % page_size > 0:
+        max_page= max_page + 1
+
+    pages = list(range(0, max_page))
+
+    page=request.args.get('page', default=0, type=int)
+    if page > max_page:
+        page = max_page
+    
+    first_index = page * page_size
+    last_index = first_index + page_size
+
+    if last_index > len(fighters):
+        last_index = len(fighters)
+        first_index = last_index - page_size
+
+    return render_template('searchdata.html', title='fighters', items=fighters[first_index:last_index], table_title='FIGHTERS', pages=pages)
 
 @app.route('/configurations')
 def configurations():
@@ -45,24 +91,11 @@ def api_v1_status():
     return jsonify(c)
 
 
-@app.route('/e_bouts')
-def e_bouts():
-    c = get_config()
-    bouts = json.loads(requests.get(c['SUI_SDC_URL'] + f'bouts?sort=id').content)
-    return render_template('/elements/e_filtertable.html', items=bouts, table_title='BOUTS')
-
-
-@app.route('/e_fighters')
-def e_fighters():
-    c = get_config()
-    fighters = json.loads(requests.get(c['SUI_SDC_URL'] + f'fighters?sort=id').content)
-    return render_template('/elements/e_filtertable.html', items=fighters, table_title='FIGHTERS')
-
-
 @app.route('/e_clock')
 def e_clock():
     time = datetime.now().strftime('%Y-%m-%d, %H:%M:%S')
     return render_template('/elements/e_clock.html', time=time)
+
 
 #TODO Fix exactfighter in SDC to send only the exact fighters requested by SUI.
 @app.route('/e_current_bout_table')
@@ -73,11 +106,11 @@ def e_current_bout_table():
 
     p1name = sbo_status['bout']['p1name']
     p1bets = sbo_status['bout']['p1total']
-    rf = json.loads(requests.get(c['SUI_SDC_URL'] + f'exactfighter?name={p1name}').content)
+    rf = json.loads(requests.get(c['SUI_SDC_URL'] + f'fighters?name={p1name}').content)
     
     p2name = sbo_status['bout']['p2name']
     p2bets = sbo_status['bout']['p2total']
-    bf = json.loads(requests.get(c['SUI_SDC_URL'] + f'exactfighter?name={p2name}').content)
+    bf = json.loads(requests.get(c['SUI_SDC_URL'] + f'fighters?name={p2name}').content)
 
     red = {'team': 'RED', 'name': p1name, 'bets': p1bets, 'wins': None, 'losses': None, 'elo': None, 'num_upsets': None, 'current_streak': None, 'date_of_debut': None}
     blue = {'team': 'BLUE', 'name': p2name, 'bets': p2bets, 'wins': None, 'losses': None, 'elo': None, 'num_upsets': None, 'current_streak': None, 'date_of_debut': None}
