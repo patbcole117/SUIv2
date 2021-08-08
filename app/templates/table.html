@@ -1,18 +1,18 @@
 <div>
     <h5 id="table_title">{{table_title}}</h5>
-    <table>
+    <table id="mini-table">
         <thead>
-            <tr>
+            <tr id="mini-tr">
                 {% for k, v in items[0].items() %}
-                <th>{{k.upper().replace("_", " ")}}</th>
+                <th id="mini-th">{{k.upper().replace("_", " ")}}</th>
                 {% endfor %}
             </tr>
         </thead>
         <tbody>
             {% for i in items %}
-            <tr>
+            <tr id="mini-tr">
                 {% for k, v in i.items() %}
-                <td>{{v}}</td>
+                <td id="mini-td">{{v}}</td>
                 {% endfor %}
             </tr>
             {% endfor %}

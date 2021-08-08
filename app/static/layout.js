@@ -21,3 +21,7 @@ setInterval(function(){
 setInterval(function(){
     $('#latest_fighters').load('/e_latest_fighters_table');
 }, 60000);
+
+$(document).ready(function() {
+    $('#searchdata').DataTable();
+} );
