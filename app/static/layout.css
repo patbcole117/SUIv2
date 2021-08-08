@@ -1,0 +1,155 @@
+/*##############################*/
+/*########## DEFAULTS ##########*/
+/*##############################*/
+
+body, html {
+    margin: 0px;
+    height: 100%;
+
+    background-color: #06090F;
+
+    color: white;
+    font-family: 'Lato', sans-serif;
+    font-size: 12px;
+}
+
+a:link {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #00AAAA;
+    text-decoration: none;
+}
+
+#box {
+    display: flex;
+    flex-direction: column;
+
+    height: auto;
+    width: 100%;
+}
+
+#clock_div {
+    color: #FFFFFF;
+    line-height: 4px;
+    padding: 5px 0px;
+    text-align: center;
+}
+
+#twitch_embed.slice {
+    height: 90vh;
+}
+
+
+#twitch_embed.twitch_embed_mini {
+    height: 45vh;
+    width: 50%
+}
+
+.slice {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+
+    border-top: 1px solid lawngreen;
+    border-bottom: 1px solid lawngreen;
+    background-color: #161B22;
+    
+    height: auto;
+    width: 100%;
+}
+
+
+
+/*##############################*/
+/*########## nav.html ##########*/
+/*##############################*/
+
+#nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    height: 5vh;
+}
+
+#logo {
+    height: 4vh;
+    width: auto;
+}
+
+.navlink {
+    margin-left: 1vw;
+}
+
+/*##############################*/
+/*######### table.html #########*/
+/*##############################*/
+#table_title {
+    color: #FFFFFF;
+    text-align: center;
+}
+
+table {
+    margin: 25px auto;
+    border-collapse: collapse;
+    border: 1px solid #FFFFFF;
+    border-bottom: 2px solid #00CCCC;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.10),
+    0px 10px 20px rgba(0, 0, 0, 0.05),
+    0px 20px 20px rgba(0, 0, 0, 0.05),
+    0px 30px 20px rgba(0, 0, 0, 0.05),;
+    width: auto;
+}
+
+tr {
+    background-color:#111D2E;
+}
+
+tr:hover {
+    background-color:#101F20;
+}
+
+th, td {
+    color: #AAAAAA;
+    border: 1px solid #FFFFFF;
+    padding: 12px 35px;
+    border-collapse: collapse;
+}
+
+th {
+    background: #0D1117;
+    color: #FFFFFF;
+    font-size: 12px;
+}
+
+/*##############################*/
+/*######### conf.html #########*/
+/*##############################*/
+#config_main {
+    background-color: #30363D;
+    box-shadow: inset 2px 2px 4px 5px rgba(0,0,0,0.3);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0px;
+    width: 20vw;
+}
+
+#config_title {
+    background-color: #00AAAA;
+    text-align: center;
+}
+
+#config_pre {
+    margin: 12px 12px;
+    white-space: pre-wrap;
+}

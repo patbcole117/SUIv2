@@ -1,79 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{title}}</title>
-    <link rel="stylesheet" href="/static/style.css"/>
-    <link rel="stylesheet" href="/static/elements/e_table.css"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">  
+{% extends 'layout.html' %}
+{% block content %}
 
-</head>
-<body>
-
-<div id="main">
-    <div class="slice" id="top"></div>
     <div class="slice" id="mini_twitch">
-        <div id="twitch_embed_mini"></div>
+        <div class=twitch_embed_mini id="twitch_embed"></div>
         <div id="right_box">
-        <div id="clock"></div>
-        <div id="current_bout"></div>
+            <div id="clock"></div>
+            <div id="current_bout"></div>
         </div>
     </div>
-    <div class="slice" id="tables">
-        <div class="table" id="table">
-          <div class="e_table_div">
-              <h5 id="e_table_h5">{{table_title}}</h5>
-              <table id="filterTable">
-                  <thead>
-                      <tr>
-                          {% for k, v in items[0].items() %}
-                          <th>{{k.upper().replace("_", " ")}}</th>
-                          {% endfor %}
-                      </tr>
-                  </thead>
-                  <tbody id="filterBody">
-                      {% for i in items %}
-                      <tr>
-                          {% for k, v in i.items() %}
-                          <td>{{v}}</td>
-                          {% endfor %}
-                      </tr>
-                      {% endfor %}
-                  </tbody>
-              </table>
-          </div>
-        </div>
-        <div class="slice">
-            <div id="page_numbers">
-                pages: 
-                {% for p in pages %}
-                <a href="/{{title}}?page={{p}}">{{p}}</a>
-                {% endfor %}
-            </div>
+
+    <div class="slice">
+        <div>
+            <h5 id="table_title">{{table_title}}</h5>
+            <table id="searchdata" class="display">
+                <thead>
+                    <tr>
+                        {% for k, v in items[0].items() %}
+                        <th>{{k.upper().replace("_", " ")}}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in items %}
+                    <tr>
+                        {% for k, v in i.items() %}
+                        <td>{{v}}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
+
+    <div class="slice">
+        <div id="page_numbers">
+            pages: 
+            {% for p in pages %}
+            <a href="/{{title}}?page={{p}}">{{p}}</a>
+            {% endfor %}
+        </div>
+    </div>
+
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js" integrity="sha512-qzgd5cYSZcosqpzpn7zF2ZId8f/8CHmFKZ8j7mU4OUXTNRd5g+ZHBPsgKEwoqxCtdQvExE5LprwwPAgoicguNg==" crossorigin="anonymous"></script>
-<script src="/static/searchdata.js"></script>
-<script src="/static/elements/e_filtertable.js"></script>
-
-<script src="https://embed.twitch.tv/embed/v1.js"></script>
-
-<!-- Create a Twitch.Embed object that will render within the "twitch-embed" element -->
-<script type="text/javascript">
-  new Twitch.Embed("twitch_embed_mini", {
-    width: "100%",
-    height: "100%",
-    channel: "saltybet",
-    muted: "true",
-    // Only needed if this page is going to be embedded on other websites
-    parent: ["gyokuro.info", "gyokuro.dev", "localhost"]
-  });
-</script>
-
-</body>
-</html>
+{% endblock %}

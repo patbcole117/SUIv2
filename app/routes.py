@@ -122,7 +122,7 @@ def api_v1_status():
 @app.route('/e_clock')
 def e_clock():
     time = datetime.now().strftime('%Y-%m-%d, %H:%M:%S')
-    return render_template('/elements/e_clock.html', time=time)
+    return render_template('clock.html', time=time)
 
 
 @app.route('/e_current_bout_table')
@@ -160,35 +160,29 @@ def e_current_bout_table():
     
     current_bout = [red, blue]
     print (current_bout)
-    return render_template('/elements/e_table.html', items=current_bout, table_title='CURRENT BOUT')
+    return render_template('table.html', items=current_bout, table_title='CURRENT BOUT')
 
 
 @app.route('/e_latest_bouts_table')
 def e_latest_bouts_table():
     c = get_config()
     latest_bouts = json.loads(requests.get(c['SUI_SDC_URL'] + f'bouts?num=10&sort=id&sort_type=bottom').content)
-    return render_template('/elements/e_table.html', items=latest_bouts, table_title='LATEST BOUTS')
+    return render_template('table.html', items=latest_bouts, table_title='LATEST BOUTS')
 
 
 @app.route('/e_latest_fighters_table')
 def e_latest_fighters_table():
     c = get_config()
     latest_fighters = json.loads(requests.get(c['SUI_SDC_URL'] + f'fighters?num=10&sort=id&sort_type=bottom').content)
-    return render_template('/elements/e_table.html', items=latest_fighters, table_title='LATEST FIGHTERS')
-
-
-
-@app.route('/e_top')
-def e_top():
-    return render_template('/elements/e_top.html')
-
+    return render_template('table.html', items=latest_fighters, table_title='LATEST FIGHTERS')
+    
 
 @app.route('/e_sbo_config')
 def e_sbo_config():
     c = get_config()
     sbo_status = json.loads(requests.get(c['SUI_SBO_URL'] + f'status').content)
     sbo_status = json.dumps(sbo_status, indent=2)
-    return render_template('/elements/e_config.html', items=sbo_status, title='SBO CONFIGURATION')
+    return render_template('config.html', items=sbo_status, title='SBO CONFIGURATION')
 
 
 @app.route('/e_sdc_config')
@@ -196,11 +190,11 @@ def e_sdc_config():
     c = get_config()
     sdc_status = json.loads(requests.get(c['SUI_SDC_URL'] + f'status').content)
     sdc_status = json.dumps(sdc_status, indent=2)
-    return render_template('/elements/e_config.html', items=sdc_status, title='SDC CONFIGURATION')
+    return render_template('config.html', items=sdc_status, title='SDC CONFIGURATION')
 
 
 @app.route('/e_sui_config')
 def e_sui_config():
     sui_status = get_config()
     sui_status = json.dumps(sui_status, indent=2)
-    return render_template('/elements/e_config.html', items=sui_status, title='SUI CONFIGURATION')
+    return render_template('config.html', items=sui_status, title='SUI CONFIGURATION')

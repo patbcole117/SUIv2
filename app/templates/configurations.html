@@ -1,52 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{title}}</title>
-    <link rel="stylesheet" href="/static/style.css"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">  
+{% extends 'layout.html' %}
 
-</head>
-<body>
-
+{% block content %}
 <div id="main">
-
-    <div class="slice" id="top"></div>
-
-    <div class="slice" id="mini_twitch">
-        <div id="twitch_embed_mini"></div>
-        <div id="right_box">
-        <div id="clock"></div>
-        <div id="current_bout"></div>
+    <div class="slice">
+        <div class=twitch_embed_mini id="twitch_embed"></div>
+        <div>
+          <div id="clock"></div>
+          <div id="current_bout"></div>
         </div>
     </div>
-    
-    <div class="slice" id="configurations">
+    <div class="slice">
         <div class="configuration" id="sbo"></div>
         <div class="configuration" id="sdc"></div>
         <div class="configuration" id="sui"></div>
     </div>
-
 </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="/static/configurations.js"></script>
-
-<script src="https://embed.twitch.tv/embed/v1.js"></script>
-
-<!-- Create a Twitch.Embed object that will render within the "twitch-embed" element -->
-<script type="text/javascript">
-  new Twitch.Embed("twitch_embed_mini", {
-    width: "100%",
-    height: "100%",
-    channel: "saltybet",
-    muted: "true",
-    // Only needed if this page is going to be embedded on other websites
-    parent: ["gyokuro.info", "gyokuro.dev", "localhost"]
-  });
-</script>
-
-</body>
-</html>
+{% endblock %}
